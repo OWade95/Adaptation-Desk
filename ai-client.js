@@ -6,7 +6,7 @@
   let generation = 0;
   const cancelled = () => Object.assign(new Error('Request stopped.'), { name: 'AbortError' });
 
-  async function send(prompt, epoch) {
+  async function send(prompt, epoch, image) {
     if (epoch !== generation) throw cancelled();
     const controller = new AbortController();
     controllers.add(controller);
@@ -15,12 +15,13 @@
       const response = await fetch('/api/complete', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, ...(image ? { image } : {}) }),
         signal: controller.signal
       });
       const data = await response.json().catch(() => null);
       if (epoch !== generation) throw cancelled();
       if (!response.ok) throw new Error(data?.error || 'The AI service is unavailable. Please try again.');
+      if (image && data?.visualRead !== true) throw new Error('Visual PDF reading is not deployed yet. Upload api/complete.js as well as the HTML and refresh.');
       if (typeof data?.text !== 'string') throw new Error('The AI service returned an invalid response.');
       return data.text;
     } finally {
@@ -33,13 +34,13 @@
     while (active < 2 && queue.length) {
       const item = queue.shift();
       active++;
-      send(item.prompt, item.epoch).then(item.resolve, item.reject).finally(() => { active--; drain(); });
+      send(item.prompt, item.epoch, item.image).then(item.resolve, item.reject).finally(() => { active--; drain(); });
     }
   }
 
   window.adaptationAI = {
-    complete(prompt) {
-      return new Promise((resolve, reject) => { queue.push({ prompt, resolve, reject, epoch: generation }); drain(); });
+    complete(prompt, image) {
+      return new Promise((resolve, reject) => { queue.push({ prompt, image, resolve, reject, epoch: generation }); drain(); });
     },
     cancel() {
       generation++;
