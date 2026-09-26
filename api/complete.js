@@ -19,14 +19,14 @@ function consume(key, limit, now) {
 function upstreamError(status, data) {
   const detail = String(data?.error?.message || '').toLowerCase();
   if (detail.includes('credit') || detail.includes('billing')) {
-    return 'Claude API credits are unavailable. Add credits in Claude Console, then try again.';
+    return 'AI processing credits are unavailable. Please contact the site owner.';
   }
   if (status === 401 || status === 403) {
-    return 'Claude could not authenticate. Check the API key and its permissions in Vercel.';
+    return 'The AI service could not authenticate. Please contact the site owner.';
   }
-  if (status === 404) return 'The configured Claude model is unavailable for this account.';
-  if (status === 429) return 'Claude is temporarily rate-limited. Please wait a minute and try again.';
-  return 'Claude could not complete this request. Please try again shortly.';
+  if (status === 404) return 'The AI service is unavailable for this account. Please contact the site owner.';
+  if (status === 429) return 'The AI service is temporarily rate-limited. Please wait a minute and try again.';
+  return 'AI could not complete this request. Please try again shortly.';
 }
 
 export default async function handler(req, res) {
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
     image = { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: value.data } };
   }
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) return res.status(503).json({ error: 'Live AI is not configured. Add ANTHROPIC_API_KEY in Vercel and redeploy.' });
+  if (!apiKey) return res.status(503).json({ error: 'AI processing is not configured. Please contact the site owner.' });
 
   const now = Date.now();
   for (const [key, entry] of windows) if (entry.until <= now) windows.delete(key);
@@ -100,12 +100,12 @@ export default async function handler(req, res) {
     });
     const data = await response.json().catch(() => null);
     if (!response.ok) return res.status(response.status === 429 ? 429 : 502).json({ error: upstreamError(response.status, data) });
-    if (data?.stop_reason === 'max_tokens') return res.status(502).json({ error: 'Claude reached the response limit. Try a shorter article or request.' });
+    if (data?.stop_reason === 'max_tokens') return res.status(502).json({ error: 'AI reached the response limit. Try a shorter article or request.' });
     const text = Array.isArray(data?.content) ? data.content.filter(part => part.type === 'text').map(part => part.text).join('\n') : '';
-    if (!text.trim()) return res.status(502).json({ error: 'Claude returned no text. Please try again.' });
+    if (!text.trim()) return res.status(502).json({ error: 'AI returned no text. Please try again.' });
     return res.status(200).json({ text, ...(image ? { visualRead: true } : {}) });
   } catch (error) {
-    return res.status(error.name === 'AbortError' ? 504 : 502).json({ error: error.name === 'AbortError' ? 'Claude took too long to respond. Please try again.' : 'Unable to reach Claude. Please try again shortly.' });
+    return res.status(error.name === 'AbortError' ? 504 : 502).json({ error: error.name === 'AbortError' ? 'AI took too long to respond. Please try again.' : 'Unable to reach the AI service. Please try again shortly.' });
   } finally {
     clearTimeout(timeout);
     active--;
