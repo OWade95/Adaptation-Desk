@@ -54,6 +54,21 @@ export default async function handler(req, res) {
   const prompt = typeof body?.prompt === 'string' ? body.prompt.trim() : '';
   if (!prompt) return res.status(400).json({ error: 'The request is empty.' });
   if (prompt.length > MAX_PROMPT) return res.status(413).json({ error: 'The article is too long. Use a shorter extract.' });
+  // One resized PDF page per request keeps the payload below Vercel's 4.5 MB limit.
+  let image = null;
+  if (body.image !== undefined) {
+    const value = body.image;
+    if (!value || value.media_type !== 'image/jpeg' || typeof value.data !== 'string' ||
+        value.data.length > 3500000 || value.data.length < 16 ||
+        !/^[A-Za-z0-9+/]+={0,2}$/.test(value.data) || value.data.length % 4 !== 0) {
+      return res.status(400).json({ error: 'The PDF page image is invalid or too large. Try fewer or simpler pages.' });
+    }
+    const bytes = Buffer.from(value.data, 'base64');
+    if (bytes[0] !== 0xff || bytes[1] !== 0xd8 || bytes[2] !== 0xff) {
+      return res.status(400).json({ error: 'The PDF page could not be read as an image.' });
+    }
+    image = { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: value.data } };
+  }
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(503).json({ error: 'Live AI is not configured. Add ANTHROPIC_API_KEY in Vercel and redeploy.' });
 
@@ -80,7 +95,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6',
         max_tokens: 4096,
-        messages: [{ role: 'user', content: prompt }]
+        messages: [{ role: 'user', content: image ? [image, { type: 'text', text: prompt }] : prompt }]
       })
     });
     const data = await response.json().catch(() => null);
@@ -88,7 +103,7 @@ export default async function handler(req, res) {
     if (data?.stop_reason === 'max_tokens') return res.status(502).json({ error: 'Claude reached the response limit. Try a shorter article or request.' });
     const text = Array.isArray(data?.content) ? data.content.filter(part => part.type === 'text').map(part => part.text).join('\n') : '';
     if (!text.trim()) return res.status(502).json({ error: 'Claude returned no text. Please try again.' });
-    return res.status(200).json({ text });
+    return res.status(200).json({ text, ...(image ? { visualRead: true } : {}) });
   } catch (error) {
     return res.status(error.name === 'AbortError' ? 504 : 502).json({ error: error.name === 'AbortError' ? 'Claude took too long to respond. Please try again.' : 'Unable to reach Claude. Please try again shortly.' });
   } finally {
