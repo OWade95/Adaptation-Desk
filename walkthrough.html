@@ -1,0 +1,77 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A walkthrough of Oliver Wade's investment communications workflow: source-linked findings, audience adaptation and human review."><title>Adaptation Desk walkthrough | Oliver Wade</title><style>
+*{box-sizing:border-box}body{margin:0;background:#faf9f6;color:#252623;font:16px/1.65 system-ui,sans-serif}header,main,footer{max-width:1120px;margin:auto;padding:26px 28px}header{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:1px solid #ddd9d2}a{color:inherit;text-underline-offset:4px}.eyebrow{font-size:12px;letter-spacing:.1em;font-weight:650;color:#666;margin:0 0 12px}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.3}h1{font-size:clamp(32px,5vw,54px);max-width:850px;margin:16px 0}h2{font-size:30px;margin:8px 0 20px}h3{font-size:20px}.lede{font-size:19px;max-width:850px}.actions{display:flex;gap:14px;flex-wrap:wrap;margin:25px 0 32px}.button{background:#252623;color:#fff;padding:11px 18px;border-radius:4px;text-decoration:none}.secondary{background:#fff;color:#252623;border:1px solid #ccc}.note{background:#f3ead4;border-left:4px solid #a37f35;padding:16px 20px;font-size:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,275px),1fr));gap:18px}.card{background:#fff;border:1px solid #dedbd5;border-radius:6px;padding:22px}.context{font-size:13px;color:#5c605c}blockquote{border-left:2px solid #ccc;padding-left:14px;margin:20px 0 0;font-size:14px;color:#555}section{margin:50px 0}.bad{border-color:#d5a6a4;background:#fdf7f6}.badge{display:inline-block;background:#f5e3e1;color:#8b2525;border-radius:3px;padding:3px 9px;font-size:12px;font-weight:700}.good{color:#326748}table{width:100%;border-collapse:collapse;text-align:left;background:#fff;font-size:14px}th,td{padding:14px;border-bottom:1px solid #ddd;vertical-align:top}details{background:#fff;border:1px solid #ddd9d2;padding:16px 20px;margin-bottom:10px;border-radius:4px}summary{cursor:pointer;font-weight:600}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.7 Georgia,serif;margin:22px 0}.steps{padding-left:24px}.steps li{padding:7px 0}footer{font-size:12px;color:#666;border-top:1px solid #ddd9d2}@media print{.actions{display:none}body{background:white}section{break-inside:avoid}}@media(max-width:600px){header,main,footer{padding:20px}th,td{padding:10px}}</style></head><body>
+<header><strong>Adaptation Desk</strong><span>Built by Oliver Wade · Independent demonstration</span></header><main>
+<p class="eyebrow">INVESTMENT COMMUNICATIONS · A WORKFLOW WALKTHROUGH</p><h1>One source. Several audiences.<br>Human review throughout.</h1><p class="lede">A demonstration of how investment research can become RM briefings, client emails and social posts, while keeping source evidence and editorial decisions visible.</p><div class="actions"><a class="button" href="./index.html#example">Explore the interactive example</a><a class="button secondary" href="./index.html">Start a live run</a></div>
+<div class="note"><strong>Prepared illustration, not a live AI run.</strong> The example uses a historical editorial summary of IMF research dated 8 April 2024. The outputs and one deliberate error were prepared in advance. No visitor review or sign-off is implied. This page works without JavaScript or an AI connection.</div>
+<section><p class="eyebrow">01 / SOURCE AND EVIDENCE</p><h2>Keep the definition beside the figure.</h2><p>The source is a short historical private-credit summary. The full tool accepts pasted text and selected PDF pages. Findings retain their supporting passages and important context.</p><div class="grid"><article class="card"><p class="eyebrow">SOURCE-LINKED FINDING</p><h3>Global private credit assets and committed capital exceeded USD 2.1 trillion in 2023; the measure is not invested assets alone.</h3><p class="context">Global private credit assets and committed capital · USD · 2023 · Historical observation reported in April 2024</p><blockquote>The IMF reported that global private credit assets and committed capital exceeded USD 2.1 trillion in 2023. Around three-quarters were in the United States. This measure includes committed capital and should not be described as invested assets alone.</blockquote></article><article class="card"><p class="eyebrow">SOURCE-LINKED FINDING</p><h3>Low reported price volatility does not necessarily mean low economic risk: infrequent trading and model-based valuations can delay recognition of deterioration.</h3><p class="context">Reported price volatility and economic risk · Historical IMF summary dated 8 April 2024 · Infrequent trading and model-based valuations</p><blockquote>Infrequent trading and model-based valuations can delay recognition of deterioration. Low reported price volatility does not necessarily mean low economic risk.</blockquote></article><article class="card"><p class="eyebrow">SOURCE-LINKED FINDING</p><h3>At the time of its April 2024 assessment, the IMF saw limited immediate financial-stability risks but warned that growth, opacity and interconnectedness could increase vulnerabilities.</h3><p class="context">Immediate financial-stability risks · April 2024 assessment · Qualitative assessment; potential future vulnerabilities</p><blockquote>The IMF assessed immediate financial-stability risks as limited at the time, while warning that continued growth, opacity and interconnectedness could increase vulnerabilities. Better reporting and supervisory monitoring were recommended.</blockquote></article></div><p><a href="https://www.imf.org/en/blogs/articles/2024/04/08/fast-growing-usd2-trillion-private-credit-market-warrants-closer-watch">Read the original IMF article, dated 8 April 2024</a></p></section>
+<section><p class="eyebrow">02 / WHY TWO CHECKS MATTER</p><h2>A matching number can still make the wrong claim.</h2><div class="grid"><article class="card"><span class="eyebrow">NUMERICAL MATCHING</span><h3 class="good">USD 2.1 trillion · 2023</h3><p>Both figures appear in the source. That alone does not establish what they measure.</p></article><article class="card bad"><span class="badge">HIGH · DELIBERATELY SEEDED ERROR</span><h3>“Global private credit invested assets exceeded USD 2.1 trillion in 2023.”</h3><p>The source includes <strong>assets and committed capital</strong>. Calling the whole measure invested assets changes its meaning.</p><p><strong>Suggested correction:</strong> “Global private credit assets and committed capital exceeded USD 2.1 trillion in 2023.”</p></article></div><p>This flag is a prepared illustration. In a live run, numerical matching is performed by code and a separate AI review checks meaning. Neither replaces a person's assessment of the source.</p></section>
+<section><p class="eyebrow">03 / AUDIENCE ADAPTATION</p><h2>Six prepared outputs to explore.</h2><p>The RM briefing contains the deliberate error shown above. The email examples include placeholders and illustrative sender identities; they are not approved communications.</p><details><summary>RM briefing</summary><pre>## In one line
+The IMF&#x27;s historical private-credit assessment highlights the importance of definitions, valuation practices and the date of a risk assessment.
+
+## Why it matters to clients
+Global private credit invested assets exceeded USD 2.1 trillion in 2023.
+
+## Talking points
+- Infrequent trading and model-based valuations can delay recognition of deterioration. Low reported price volatility does not necessarily mean low economic risk.
+- At the time of its April 2024 assessment, the IMF saw limited immediate financial-stability risks but warned that growth, opacity and interconnectedness could increase vulnerabilities.
+
+## Handle with care
+- These are historical observations, not a current market update.
+- The scale measure includes committed capital. The deliberately incorrect description above illustrates why matching a number alone is insufficient.
+
+## Useful conversations
+- Understanding how a source defines its market-size measure.
+- Distinguishing reported price volatility from economic risk.
+- Keeping the original date and qualifications attached to risk assessments.</pre></details><details><summary>Client email · private client</summary><pre>Dear [First name],
+
+I thought you might find this historical IMF summary useful as background to private-credit terminology and risk reporting. The observations were published in April 2024; they are not a current market update.
+
+The IMF reported that global private credit assets and committed capital exceeded USD 2.1 trillion in 2023. That definition matters: the figure includes committed capital and should not be read as invested assets alone.
+
+The summary also explains why low reported price volatility does not necessarily mean low economic risk. Infrequent trading and model-based valuations can delay recognition of deterioration. A smooth reported valuation series should therefore be read alongside the source&#x27;s qualifications.
+
+At the time, the IMF assessed immediate financial-stability risks as limited, while warning that growth, opacity and interconnectedness could increase vulnerabilities. Both the date of that assessment and its forward-looking caution belong with the claim.
+
+These points provide background for interpreting the research, rather than a recommendation about an allocation or a product. The source gives further context for its definitions and observations.
+
+Read the source:
+https://www.imf.org/en/blogs/articles/2024/04/08/fast-growing-usd2-trillion-private-credit-market-warrants-closer-watch
+
+Please let me know if you would like to discuss the terminology in the research.
+
+With kind regards,
+[Name]
+[Title], Pictet Wealth Management
+[Approved disclaimer]
+
+For information only. This is not investment advice.</pre></details><details><summary>Client email · institutional investor</summary><pre>For professional investors only.
+
+Dear [First name],
+
+I am sharing a historical editorial summary of IMF research published on 8 April 2024. It provides context for interpreting private-credit market size, valuation practices and point-in-time risk assessments; it is not a current market update.
+
+The IMF reported that global private credit assets and committed capital exceeded USD 2.1 trillion in 2023. The inclusion of committed capital is essential to the definition. This is not a measure of invested assets alone, and comparisons require consistent definitions.
+
+Infrequent trading and model-based valuations can delay recognition of deterioration. Low reported price volatility does not necessarily indicate low economic risk. These observations concern how reported valuations should be interpreted rather than a forecast of losses.
+
+At the time of its April 2024 assessment, the IMF saw limited immediate financial-stability risks, while warning that growth, opacity and interconnectedness could increase vulnerabilities. The historical date and that qualification must accompany the assessment.
+
+The underlying source sets out the original context; the material here is a concise editorial summary of public research, not a new empirical study or a recommendation concerning a strategy or manager.
+
+Read the source:
+https://www.imf.org/en/blogs/articles/2024/04/08/fast-growing-usd2-trillion-private-credit-market-warrants-closer-watch
+
+With kind regards,
+[Name]
+[Title], Pictet Alternative Advisors
+[Approved disclaimer]
+
+For information only. This is not investment advice.</pre></details><details><summary>LinkedIn · personal voice</summary><pre>A useful distinction in the IMF&#x27;s April 2024 private-credit research: global assets and committed capital exceeded USD 2.1 trillion in 2023. That includes committed capital, not invested assets alone. It is a historical observation, not a current market update. Keeping the definition beside the number helps readers understand precisely what the source measures.
+
+https://www.imf.org/en/blogs/articles/2024/04/08/fast-growing-usd2-trillion-private-credit-market-warrants-closer-watch</pre></details><details><summary>LinkedIn · short and neutral</summary><pre>Low reported price volatility does not necessarily mean low economic risk. The IMF&#x27;s April 2024 private-credit research notes that infrequent trading and model-based valuations can delay recognition of deterioration. This is historical research, not a current market update.
+
+https://www.imf.org/en/blogs/articles/2024/04/08/fast-growing-usd2-trillion-private-credit-market-warrants-closer-watch</pre></details><details><summary>LinkedIn · figure-led</summary><pre>USD 2.1 trillion: global private credit assets and committed capital exceeded that level in 2023, according to the IMF&#x27;s April 2024 research. The figure includes committed capital and must not be described as invested assets alone. This historical observation illustrates why a market-size number needs its definition, currency and period alongside it.
+
+https://www.imf.org/en/blogs/articles/2024/04/08/fast-growing-usd2-trillion-private-credit-market-warrants-closer-watch</pre></details></section>
+<section><p class="eyebrow">04 / REVIEW AND RELEASE</p><h2>The person stays in control.</h2><ol class="steps"><li>Check each selected finding against its supporting passage and context; edit or deselect it if needed.</li><li>Mark each selected finding as reviewed, then approve the set for drafting.</li><li>Review numerical matches, meaning flags and audience-specific wording. An incomplete AI review blocks sign-off.</li><li>Sign off the exact version only after reviewing it. Revisions to findings require regenerated drafts and fresh approval.</li><li>Download the review pack before leaving. Work is not currently saved between sessions.</li></ol><div class="note">This is an on-demand editorial workflow. Scheduled ingestion, persistent review queues and distribution tracking are future extensions, not current features.</div></section>
+</main><footer>Independent portfolio demonstration by Oliver Wade, tailored to the PAA content application. Not affiliated with or endorsed by Pictet Alternative Advisors. Historical research is not a current market assessment or investment advice.</footer></body></html>
